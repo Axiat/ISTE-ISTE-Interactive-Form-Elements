@@ -1,7 +1,8 @@
 // enter input with the following format
 // Element : Parent
 
-"my question" | "my question"
+1: "my question" | 1
+
 2 | "my question"
 3 | "my question"
 4 | 2

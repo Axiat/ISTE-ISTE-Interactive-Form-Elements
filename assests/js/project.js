@@ -15,30 +15,50 @@ function createElements(text) {
     const used_elements = []; // keps track of elements
     for( let i = 0; i < arrayLenth; i++ ){
         const line = text_array[i];
-        console.log(line);
         if (!line.includes("//") && line.length > 0){ // ignore all commented out lines and empty lines
             const parsed_line = line.split("|");
             const element = parsed_line[0].trim();
             const parent = parsed_line[1].trim();
-            
-            if(used_elements[element] !== true && parent !== element){ // ensures each node only has one parent
-                used_elements[element] = true; // mark new element as used
 
-                if( dict[parent] === undefined  ){ // if the parent is not already recorded
-                    dict[parent] = [element];
+            let new_question;
+            if(element.includes(":")){      // if an alias is assigned to a question
+                let parsed = element.split(":");
+                const id = parsed[0].trim();
+                const question = parsed[1].trim();
+                new_question = new createQuestion(id,question,parent);
+            }
+            else{
+                new_question = new createQuestion("",element,parent);
+            }
+
+            const curr_question = new_question.question;
+            const curr_parent = new_question.parent;
+
+            if(used_elements[curr_question] !== true && !new_question.isEqual(parent) ){ // ensures each node only has one parent
+
+                used_elements[curr_question] = true; // mark new element as used
+                if( dict[curr_parent] === undefined  ){ // if the parent is not already recorded
+                    dict[curr_parent] = [new_question];
                 }
                 else{                               // update key if parent is listed
-                    const old_vals = dict[parent];
-                    dict[parent] = [element].concat(old_vals);
+                    const old_vals = dict[curr_parent];
+                    dict[curr_parent] = [new_question].concat(old_vals);
                 }
             }
 
         }
     }
 
+
     /* Iterate over keys in dictionary to help build the page */
     for( const key in dict ){
-        const line = key + " --> " + dict[key];
+        let line = key + " --> ";
+        const array_of_questions = dict[key];
+
+        for(const index in array_of_questions){
+            line += (array_of_questions[index].question) + ", ";
+        }
+
         const p = document.createElement("p");
         p.appendChild(  document.createTextNode(line)   );
         div.appendChild(p);
@@ -48,19 +68,18 @@ function createElements(text) {
 }
 
 
-function newQuestion(id,question,parent){
+function createQuestion(id, question, parent){
+    "use strict";
     this.id = id;
     this.question = question;
     this.parent = parent;
 
-    this.sayHi = function () {
-      console.log("hello bro");
+    this.isEqual = function (input) {
+        return (input === id || input === question);
     };
 
 }
 
-var q1 =  new newQuestion(1,"what is that?","a");
-q1.sayHi();
 
 
 /**
