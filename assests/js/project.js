@@ -34,6 +34,7 @@ function createElements(text) {
             const curr_question = new_question.question;
             const curr_parent = new_question.parent;
 
+            // bug is here
             if(used_elements[curr_question ] !== true && !new_question.isEqual(parent) ){ // ensures each node only has one parent
 
                 used_elements[curr_question] = true; // mark new element as used
