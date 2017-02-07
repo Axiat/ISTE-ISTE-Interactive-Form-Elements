@@ -15,6 +15,7 @@ function createElements(text) {
     const used_elements = []; // keps track of elements
     for( let i = 0; i < arrayLenth; i++ ){
         const line = text_array[i];
+        console.log(line);
         if (!line.includes("//") && line.length > 0){ // ignore all commented out lines and empty lines
             const parsed_line = line.split("|");
             const element = parsed_line[0].trim();
@@ -45,6 +46,21 @@ function createElements(text) {
 
     document.getElementById("content").appendChild(div);
 }
+
+
+function newQuestion(id,question,parent){
+    this.id = id;
+    this.question = question;
+    this.parent = parent;
+
+    this.sayHi = function () {
+      console.log("hello bro");
+    };
+
+}
+
+var q1 =  new newQuestion(1,"what is that?","a");
+q1.sayHi();
 
 
 /**
