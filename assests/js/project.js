@@ -6,7 +6,7 @@ function createElements(text) {
     "use strict";
     const text_array = text;
     const div = document.createElement("div");
-    div.className = "text-center";
+    div.className = "question-wrapper";
     const arrayLenth = text_array.length;
 
 
@@ -17,10 +17,10 @@ function createElements(text) {
         const line = text_array[i];
         if (!line.includes("//") && line.length > 0){ // ignore all commented out lines and empty lines
             const parsed_line = line.split("|");
-            const element = parsed_line[0];
-            const parent = parsed_line[1];
-
-            if(used_elements[element] !== true){ // ensures each node only has one parent
+            const element = parsed_line[0].trim();
+            const parent = parsed_line[1].trim();
+            
+            if(used_elements[element] !== true && parent !== element){ // ensures each node only has one parent
                 used_elements[element] = true; // mark new element as used
 
                 if( dict[parent] === undefined  ){ // if the parent is not already recorded
@@ -60,7 +60,6 @@ function readTextFile(file) {
         if(rawFile.readyState === 4) {
             if(rawFile.status === 200 || rawFile.status === 0) {
                 const allText = rawFile.responseText;
-                //alert(allText);  // jshint ignore:line
                 createElements(allText.split("\n"));
             }
         }

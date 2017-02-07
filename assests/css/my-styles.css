@@ -9,24 +9,41 @@
                 Main app styles
    ========================================================================= */
 
+*{
+    margin: 0;
+    padding: 0;
+}
 
 
 
+.row {
+    width: 100%;
+}
+
+.question-wrapper{
+
+
+}
+
+.question{
+
+}
+
+#title{
+    text-align: center;
+}
+
+#content{
+    margin: auto;
+    width:50%;
+}
 
 
 
+main {
+    max-width: 900px;
+    margin: auto;
+    width: 80%;
+}
 
-
-
-
-
-
-
-
-
-
-
-/* =========================================================================
-                Overwritten styles from boostrap
-   ========================================================================= */
 
