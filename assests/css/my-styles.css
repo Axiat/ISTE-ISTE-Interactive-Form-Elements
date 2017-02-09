@@ -21,9 +21,9 @@
 }
 
 .question-wrapper{
-    width: 100%;
-
+    text-align: center;
 }
+
 
 .question-label{
     color: red;

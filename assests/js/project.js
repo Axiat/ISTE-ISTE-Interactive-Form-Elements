@@ -88,13 +88,13 @@ function displayData(dict) {
 
     // html elements
     const div = document.createElement("div");
-
     // html element styles
     div.className = "question-wrapper";
 
-
     /* Iterate over keys in dictionary to help build the page */
     for( const key in model ){
+        const question_div = document.createElement("div");
+        question_div.className = "question";
 
         // create label and assign css class
         const label  = document.createElement("label");
@@ -116,8 +116,9 @@ function displayData(dict) {
         /**
          * Append the new label and subquestions to the div
          */
-        div.appendChild(label);
-        div.appendChild(selectList);
+        question_div.appendChild(label);
+        question_div.appendChild(selectList);
+        div.appendChild(question_div);
     }
 
     document.getElementById("content").appendChild(div);   // add the new div to the page
