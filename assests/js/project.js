@@ -1,5 +1,7 @@
 /*jshint esversion: 6 */
 
+const dict = [];     // global dictionary holds the parent -> [children] relationship
+
 
 /**
  * Gets passed int the input file as raw text and builds up the data model.
@@ -12,7 +14,6 @@ function buildDataModel(text) {
     const text_array = text;
     const arrayLenth = text_array.length;
 
-    const dict = [];          // dictionary holds the parent -> [children] relationship
     const used_elements = []; // keps track of used keys in the dictionary
     const aliases = [];       // keeps track of the aliases assigned in the input file
 
@@ -32,8 +33,8 @@ function buildDataModel(text) {
              */
             if(line.includes(":")){
                 const expression = parsed_line[0].split(":");
-                const alias = expression[0];    // grab the alias
-                const elem  = expression[1];
+                const alias = expression[0].trim();    // grab the alias
+                const elem  = expression[1].trim();
 
                 aliases[alias] = elem;      // associate the question with the alias
                 element = elem;
@@ -48,7 +49,7 @@ function buildDataModel(text) {
              */
             if(aliases[parent] !== undefined){  // if the parent IS an alias
                 const elem = aliases[parent];
-                parent = elem;   // grab the question related to the alias and set the parent equal to it.
+                parent = elem.trim();   // grab the question related to the alias and set the parent equal to it.
             }
 
             /**
@@ -72,10 +73,16 @@ function buildDataModel(text) {
         }
     }
 
-    displayData(dict);      // now that the data model is complete, lets display the elments
-
+//    displayData(dict);      // now that the data model is complete, lets display the elments
+    displayFistQuestion();
 }
 
+function displayFistQuestion() {
+    const model = dict;
+    const firstQuestion = Object.keys(model)[0]; // grabs the first element out of the dictionary
+
+    console.log(firstQuestion); // proof of concept
+}
 
 /**
  * Gets pased the dictionary, which is our datamodel. We then create each element
@@ -113,6 +120,9 @@ function displayData(dict) {
             selectList.appendChild(option);
         }
 
+        selectList.onchange = function(){ display(selectList.value) };
+
+
         /**
          * Append the new label and subquestions to the div
          */
@@ -122,8 +132,24 @@ function displayData(dict) {
     }
 
     document.getElementById("content").appendChild(div);   // add the new div to the page
+}
+
+
+/**
+ * Is passed they key to questions
+ * @param input
+ */
+function display(input) {
+
+    const element  = dict[input];
+
+    if(element !== undefined){
+
+    }
 
 }
+
+
 
 
 /**
@@ -145,6 +171,7 @@ function readTextFile(file) {
     };
     rawFile.send(null);
 }
+
 
 
 readTextFile("input.txt");
