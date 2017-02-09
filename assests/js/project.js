@@ -84,17 +84,43 @@ function buildDataModel(text) {
  * @param dict
  */
 function displayData(dict) {
+    "use strict";
+    const model = dict;
+
+    // html elements
     const div = document.createElement("div");
+
+    // html element styles
     div.className = "question-wrapper";
+
+
     /* Iterate over keys in dictionary to help build the page */
-    for( const key in dict ){
-        const line = key + " --> " + dict[key];
-        const p = document.createElement("p");
-        p.appendChild(  document.createTextNode(line)   );
-        div.appendChild(p);
+    for( const key in model ){
+
+        // create label and assign css class
+        const label  = document.createElement("label");
+        label.appendChild(  document.createTextNode( key ) );
+        label.className = "question-label";
+
+
+        // Iterate through the
+        const children = model[key];
+        const selectList = document.createElement("select");
+
+        for (const index in children) {
+            const option = document.createElement("option");
+            option.appendChild( document.createTextNode(children[index]) );
+            selectList.appendChild(option);
+        }
+
+        /**
+         * Append the new label and subquestions to the div
+         */
+        div.appendChild(label);
+        div.appendChild(selectList);
     }
 
-    document.getElementById("content").appendChild(div);
+    document.getElementById("content").appendChild(div);   // add the new div to the page
 
 }
 
