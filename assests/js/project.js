@@ -1,91 +1,107 @@
+
 /*jshint esversion: 6 */
 
 
-
-function createElements(text) {
+/**
+ * Gets passed int the input file as raw text and builds up the data model.
+ * Once complete, this function then calls displayData() function to render the
+ * elments on the page.
+ * @param text
+ */
+function buildDataModel(text) {
     "use strict";
     const text_array = text;
-    const div = document.createElement("div");
-    div.className = "question-wrapper";
     const arrayLenth = text_array.length;
 
+    const dict = [];          // dictionary holds the parent -> [children] relationship
+    const used_elements = []; // keps track of used keys in the dictionary
+    const aliases = [];       // keeps track of the aliases assigned in the input file
 
-    /* Iterate over input and create dictionary */
-    const dict = [];
-    const used_elements = []; // keps track of elements
+
     for( let i = 0; i < arrayLenth; i++ ){
         const line = text_array[i];
         if (!line.includes("//") && line.length > 0){ // ignore all commented out lines and empty lines
+
             const parsed_line = line.split("|");
-            const element = parsed_line[0].trim();
-            const parent = parsed_line[1].trim();
 
-            let new_question;
-            if(element.includes(":")){      // if an alias is assigned to a question
-                let parsed = element.split(":");
-                const id = parsed[0].trim();
-                const question = parsed[1].trim();
-                new_question = new createQuestion(id,question,parent);
+            let parent = parsed_line[1].trim(); // all questions have a parent.
+            let element;
+
+
+            /**
+             * Determine if the given line uses an alias to represent a question
+             */
+            if(line.includes(":")){
+                const expression = parsed_line[0].split(":");
+                const alias = expression[0];    // grab the alias
+                const elem  = expression[1];
+
+                aliases[alias] = elem;      // associate the question with the alias
+                element = elem;
             }
-            else{
-                new_question = new createQuestion("",element,parent);
+            else {
+                element = parsed_line[0].trim();
             }
 
-            const curr_question = new_question.question;
-            const curr_parent = new_question.parent;
 
-            // bug is here
-            if(used_elements[curr_question ] !== true && !new_question.isEqual(parent) ){ // ensures each node only has one parent
+            /**
+             * check to see if the parent is an alias or just a normal question
+             */
+            if(aliases[parent] !== undefined){  // if the parent IS an alias
+                const elem = aliases[parent];
+                parent = elem;   // grab the question related to the alias and set the parent equal to it.
+            }
 
-                used_elements[curr_question] = true; // mark new element as used
-                if( dict[curr_parent] === undefined  ){ // if the parent is not already recorded
-                    dict[curr_parent] = [new_question];
+            /**
+             * This next chunk is a basic check with the following logic:
+             *     -> check if an entry exists and prevent an element from being its own parent.
+             *     -> if it doesn't exist, create it
+             *     -> otherwise concatenate the new child to it's list of children.
+             */
+            if(used_elements[element] !== true && parent !== element){ // ensures each node only has one parent
+                used_elements[element] = true; // mark new element as used
+
+                if( dict[parent] === undefined  ){ // if the parent is not already recorded
+                    dict[parent] = [element];
                 }
                 else{                               // update key if parent is listed
-                    const old_vals = dict[curr_parent];
-                    dict[curr_parent] = [new_question].concat(old_vals);
+                    const old_vals = dict[parent];
+                    dict[parent] = old_vals.concat(element);
                 }
             }
 
         }
     }
 
+    displayData(dict);      // now that the data model is complete, lest display the elments
 
+}
+
+
+/**
+ * Gets pased the dictionary, which is our datamodel. We then create each element
+ * dynamically and display it on the page.
+ * @param dict
+ */
+function displayData(dict) {
+    const div = document.createElement("div");
+    div.className = "question-wrapper";
     /* Iterate over keys in dictionary to help build the page */
     for( const key in dict ){
-        let line = key + " --> ";
-        const array_of_questions = dict[key];
-
-        for(const index in array_of_questions){
-            line += (array_of_questions[index].question) + ", ";
-        }
-
+        const line = key + " --> " + dict[key];
         const p = document.createElement("p");
         p.appendChild(  document.createTextNode(line)   );
         div.appendChild(p);
     }
 
     document.getElementById("content").appendChild(div);
-}
-
-
-function createQuestion(id, question, parent){
-    "use strict";
-    this.id = id;
-    this.question = question;
-    this.parent = parent;
-
-    this.isEqual = function (input) {
-        return (input === id || input === question);
-    };
 
 }
-
 
 
 /**
  * This function takes in the path of a input file and passes the entire
- * text as an array of strings to the "createElements" function.
+ * text as an array of strings to the "buildDataModel" function.
  * @param file
  */
 function readTextFile(file) {
@@ -96,7 +112,7 @@ function readTextFile(file) {
         if(rawFile.readyState === 4) {
             if(rawFile.status === 200 || rawFile.status === 0) {
                 const allText = rawFile.responseText;
-                createElements(allText.split("\n"));
+                buildDataModel(allText.split("\n"));
             }
         }
     };
@@ -105,4 +121,3 @@ function readTextFile(file) {
 
 
 readTextFile("input.txt");
-
