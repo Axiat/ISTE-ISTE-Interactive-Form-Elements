@@ -103,7 +103,7 @@ function displayData(dict) {
         label.className = "question-label";
 
 
-        // Iterate through the
+        // Iterate through each questions possible choices and append them to the selectList object.
         const children = model[key];
         const selectList = document.createElement("select");
 
