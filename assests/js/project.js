@@ -98,7 +98,7 @@ function displayData(dict) {
 
         // create label and assign css class
         const label  = document.createElement("label");
-        label.appendChild(  document.createTextNode( key ) );
+        label.appendChild(  document.createTextNode( key.trim() ) );
         label.className = "question-label";
 
 
@@ -109,7 +109,7 @@ function displayData(dict) {
         const length_children = children.length;
         for (let i = 0; i < length_children; i ++) {
             const option = document.createElement("option");
-            option.appendChild( document.createTextNode(children[i]) );
+            option.appendChild( document.createTextNode(children[i].trim()) );
             selectList.appendChild(option);
         }
 
