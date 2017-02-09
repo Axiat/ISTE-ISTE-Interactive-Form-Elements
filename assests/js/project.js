@@ -1,4 +1,3 @@
-
 /*jshint esversion: 6 */
 
 
@@ -73,7 +72,7 @@ function buildDataModel(text) {
         }
     }
 
-    displayData(dict);      // now that the data model is complete, lest display the elments
+    displayData(dict);      // now that the data model is complete, lets display the elments
 
 }
 
@@ -107,9 +106,10 @@ function displayData(dict) {
         const children = model[key];
         const selectList = document.createElement("select");
 
-        for (const index in children) {
+        const length_children = children.length;
+        for (let i = 0; i < length_children; i ++) {
             const option = document.createElement("option");
-            option.appendChild( document.createTextNode(children[index]) );
+            option.appendChild( document.createTextNode(children[i]) );
             selectList.appendChild(option);
         }
 
