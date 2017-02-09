@@ -5,22 +5,24 @@
 //
 //  3.) All entries must have a parent. Setting a question as it's own parent
 //      is a good way to fill this requirement without any negative effects.
+//          Ex.) "my question" | "my question"
 //
-//  3.) Each line is written in the format:   " question | parent"
+//  4.) Each line is written in the format:   " question | parent"
 //      - It's worth noting that you can alias a question
 //        to prevent unneeded repetition by using the syntax
 //        "alias : question". White space does not matter and
 //        aliases can be any symbol (not just numbers).
+//      Ex.) 1: Question A | 1
+//              -> Question A can now be referenced by the symbol "1" and has itself as
+//                  as a parent (which is not displayed in this program)
 //
-//  4.) should you choose to alias a question, you must use the alias to refer
+//  5.) should you choose to alias a question, you must use the alias to refer
 //      to the original question
 
 
 
 
 1: Question A  | 1
-A-sub question 1 | 1
-A-sub question 2 | 1
 
 2: Question B  | 1
 B-sub question 1 | 2
