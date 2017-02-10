@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
 const dict = [];     // global dictionary holds the parent -> [children] relationship
+const pictures = [];      // contains all the picures and the question they are associated with
 
 
 /**
@@ -17,7 +18,6 @@ function buildDataModel(text) {
     const used_elements = []; // keps track of used keys in the dictionary
     const aliases = [];       // keeps track of the aliases assigned in the input file
 
-
     for( let i = 0; i < arrayLenth; i++ ){
         const line = text_array[i];
         if (!line.includes("//") && line.length > 0){ // ignore all commented out lines and empty lines
@@ -26,7 +26,6 @@ function buildDataModel(text) {
 
             let parent = parsed_line[1].trim(); // all questions have a parent.
             let element;
-
 
             /**
              * Determine if the given line uses an alias to represent a question
@@ -44,9 +43,8 @@ function buildDataModel(text) {
             }
 
 
-            /**
-             * check to see if the parent is an alias or just a normal question
-             */
+
+            // check to see if the parent is an alias or just a normal question
             if(aliases[parent] !== undefined){  // if the parent IS an alias
                 const elem = aliases[parent];
                 parent = elem.trim();   // grab the question related to the alias and set the parent equal to it.
@@ -70,82 +68,170 @@ function buildDataModel(text) {
                 }
             }
 
+
+            // If there are pictures given for this question
+            if(parsed_line.length > 2){
+                const picture_list = parsed_line[2].trim().split(",");
+                const list_length = picture_list.length;
+
+
+                for( let i=0; i < list_length ; i++ ){
+                    const picture_name = picture_list[i].trim();
+
+                    if(pictures[element] === undefined){
+                        pictures[element] = [picture_name];
+                    }
+                    else{
+                        const old_val = pictures[element];
+                        pictures[element] = old_val.concat(picture_name);
+                    }
+                }
+
+            }
+
+
+
         }
     }
 
-//    displayData(dict);      // now that the data model is complete, lets display the elments
-    displayFistQuestion();
+    displayFistQuestion(); // as soon as the data model is complete, display the first question
 }
 
 function displayFistQuestion() {
-    const model = dict;
-    const firstQuestion = Object.keys(model)[0]; // grabs the first element out of the dictionary
+    "use strict";
 
-    console.log(firstQuestion); // proof of concept
+    const firstQuestion = Object.keys(dict)[0]; // grabs the first element out of the dictionary
+
+    // create container div
+    const div = document.createElement("div");
+    div.className = "question-wrapper";
+    div.id = "question-content";
+
+    document.getElementById("content").appendChild(div);   // add the new div to the page
+
+    displayQuestion(firstQuestion); // once the wrapper is in place, we can start displaying questions
 }
 
-/**
- * Gets pased the dictionary, which is our datamodel. We then create each element
- * dynamically and display it on the page.
- * @param dict
- */
-function displayData(dict) {
+
+
+function displayQuestion(input) {
     "use strict";
-    const model = dict;
 
-    // html elements
-    const div = document.createElement("div");
-    // html element styles
-    div.className = "question-wrapper";
+    const question = input;
 
-    /* Iterate over keys in dictionary to help build the page */
-    for( const key in model ){
-        const question_div = document.createElement("div");
-        question_div.className = "question";
+    // generate any pictures associated with this question
+    displayPictures(question);
 
-        // create label and assign css class
-        const label  = document.createElement("label");
-        label.appendChild(  document.createTextNode( key.trim() ) );
-        label.className = "question-label";
+    // create div that holds an individual question
+    const question_div = document.createElement("div");
+    question_div.className = "question";
+
+    // create label and assign css class
+    const label  = document.createElement("label");
+    label.appendChild(  document.createTextNode( question ) );
+    label.className = "question-label";
 
 
-        // Iterate through each questions possible choices and append them to the selectList object.
-        const children = model[key];
-        const selectList = document.createElement("select");
 
+    // create select and option elments for each child questoin
+    const selectList = document.createElement("select");
+    selectList.className = "question-select";
+
+    // set the default choice is blank
+    selectList.appendChild( document.createElement("option"));
+
+    const children = dict[question];
+
+    if(children !== undefined) {
         const length_children = children.length;
-        for (let i = 0; i < length_children; i ++) {
+
+
+        for (let i = 0; i < length_children; i++) {
             const option = document.createElement("option");
-            option.appendChild( document.createTextNode(children[i].trim()) );
+            option.className = "question-option";
+            option.appendChild(document.createTextNode(children[i].trim()));
             selectList.appendChild(option);
         }
 
-        selectList.onchange = function(){ display(selectList.value) };
+        // recursively call this function to display new questions
+        selectList.onchange = function () {
+            displayQuestion(selectList.value);
+        };
 
-
-        /**
-         * Append the new label and subquestions to the div
-         */
+        // Append the new label and subquestions to the div
         question_div.appendChild(label);
         question_div.appendChild(selectList);
-        div.appendChild(question_div);
-    }
 
-    document.getElementById("content").appendChild(div);   // add the new div to the page
+        //delete dict[question];  // once a question is asked, remove it
+
+        document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
+    }
+    updateChildQuestions(question);
+
+
 }
 
 
 /**
- * Is passed they key to questions
+ * Iterates through the pictures dictionary and displays any and all photos associated with this
+ * question
  * @param input
  */
-function display(input) {
+function displayPictures(input) {
+    "use strict";
 
-    const element  = dict[input];
+    // remove old photos from previous question
+    const pic_div = document.getElementById("picture-div");
+    while(pic_div.firstChild){
+        pic_div.removeChild(pic_div.firstChild);
+    }
 
-    if(element !== undefined){
+
+    //////////////////////////////
+    const question = input;
+    const picture_array = pictures[question];
+
+    if(picture_array !== undefined){
+        const length = picture_array.length;
+        for ( let i = 0; i < length; i++ ) {
+            const picture = document.createElement("img");
+            picture.src = "assests/images/" + picture_array[i];
+            picture.alt = "pic";
+            document.getElementById("picture-div").appendChild(picture);
+        }
 
     }
+
+}
+
+
+/**
+ * if a questions' answer is changed, we delete all questions on the page that are
+ * not directly a child of the question answered.
+ */
+function updateChildQuestions(input) {
+    "use strict";
+
+    const question = input;
+    let all_questions = document.getElementsByClassName("question");
+    let length = all_questions.length;
+
+    const children = dict[question];
+
+    console.log("selected: " + question);
+    if(children !== undefined ){
+
+        for( let i = 0; i < length ; i++ ){
+            const curr_question = all_questions[i].firstChild; // grabs the question name from the label
+            const text = curr_question.innerHTML;
+
+            if(!children.includes(text) && text !== question){
+                console.log("doesn't belong: " + text);
+            }
+        }
+    }
+
+    console.log("----------");
 
 }
 

@@ -1,13 +1,16 @@
 //  Instructions:
-//  1.) Blank lines are ignored
+//  1.) Blank lines, whitespace and tabs are ignored
 //
 //  2.) Use "//" to comment (all lines with this symbol are ignored)
 //
 //  3.) All entries must have a parent. Setting a question as it's own parent
 //      is a good way to fill this requirement without any negative effects.
-//          Ex.) "my question" | "my question"
+//          Ex.) "my question" | "my question | picture1, picture2"
+//            - if a picture is not in the top level directory of the assets/images/ folder,
+//              then write the path to the picture instead.
 //
-//  4.) Each line is written in the format:   " question | parent"
+//  4.) Each line is written in the format:   " question | parent | pictures"
+//      - Pictures part is completely optional
 //      - It's worth noting that you can alias a question
 //        to prevent unneeded repetition by using the syntax
 //        "alias : question". White space does not matter and
@@ -21,13 +24,26 @@
 
 
 
-
+// Level 1 Questions
 1: Question A  | 1
 
-2: Question B  | 1
-B-sub question 1 | 2
-B-sub question 2 | 2
+        // Level 2 Questions
+        2a: Question B  | 1              |   pug.jpg  , penguins.jpg
+        B-sub question 1 | 2a
+        B-sub question 2 | 2a
 
-3: Question C  | 1
-C-sub question 1 | 3
-C-sub question 2 | 3
+               // Level 3 Questions
+                2a-3: Question D | 2a
+                D-sub question 1 | 2a-3
+                D-Sub question 2 | 2a-3
+
+
+        2b: Question C  | 1              | Level2/W.png
+        C-sub question 1 | 2b
+        C-sub question 2 | 2b
+
+                2b-3: Question E | 2b
+                E-sub question 1 | 2b-3
+                E-sub question 2 | 2b-3
+
+
