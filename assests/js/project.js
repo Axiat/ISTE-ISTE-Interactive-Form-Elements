@@ -261,7 +261,7 @@ function updateChildQuestions() {
 
 /**
  * This function takes in the path of a input file and passes the entire
- * text as an array of strings to the "buildDataModel" function. tset
+ * text as an array of strings to the "buildDataModel" function.
  * @param file
  */
 function readTextFile(file) {
