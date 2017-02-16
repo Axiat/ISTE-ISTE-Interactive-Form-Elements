@@ -116,7 +116,6 @@ function displayFistQuestion() {
 
 function displayQuestion(input) {
     "use strict";
-    updateChildQuestions();
 
     const question = input;
 
@@ -134,7 +133,7 @@ function displayQuestion(input) {
 
 
 
-    // create select and option elments for each child questoin
+    // create select and option elements for each child question
     const selectList = document.createElement("select");
     selectList.className = "question-select";
 
@@ -167,6 +166,8 @@ function displayQuestion(input) {
 
         document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
     }
+
+    updateChildQuestions();
 
 }
 
@@ -215,43 +216,53 @@ function updateChildQuestions() {
     let length = all_questions.length;
     let should_delete = false; // boolean flag
 
+    let wrapper = document.getElementById("question-content");
 
-        for( let i = 0; i < length ; i++ ){
-
-            const curr_question = all_questions[i]; // grabs the question name from the label
-            const label = curr_question.children[0].innerHTML;
-            const selected = curr_question.children[1].value;
-
-            const curr_children = dict[selected]; // get the children of the choice
+    for( let i = 0; i < length ; i++ ){
+        const curr_question = all_questions[i]; // grabs the question name from the label
 
 
-            if(!should_delete){
 
-                if( i + 1 <= length){ // prevent index out of bounds
-
-                    const next_question = all_questions[i+1];
-
-                    if(next_question !== undefined) {
-                        const next_label = next_question.children[0].innerHTML;
+        const label = curr_question.children[0].innerHTML;
+        const selected = curr_question.children[1].value;
 
 
-                        if(!curr_children.includes(next_label) && next_label !== selected){
-                            should_delete = true;
+        // console.log("curr question: " + label);
 
-                        }
+        const curr_children = dict[selected]; // get the children of the choice
+
+
+        if(!should_delete){
+
+            //if( i+1 <= length){ // prevent index out of bounds
+
+                const next_question = all_questions[i+1];
+
+                if(next_question !== undefined) {
+                    const next_label = next_question.children[0].innerHTML;
+
+
+                    if(!curr_children.includes(next_label) && next_label !== selected){
+                        console.log(next_label+ " doesn't belong");
+                        should_delete = true;
 
                     }
 
                 }
 
-            }
-            else{
-                console.log("deleting: " + label);
+            //}
 
-            }
+        }
+        else{
+            console.log("deleting: " + label);
+            wrapper.removeChild(wrapper.childNodes[i]);
 
 
         }
+
+
+    }
+
 
 
 }
