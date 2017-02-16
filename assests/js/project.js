@@ -116,6 +116,7 @@ function displayFistQuestion() {
 
 function displayQuestion(input) {
     "use strict";
+    updateChildQuestions();
 
     const question = input;
 
@@ -167,8 +168,6 @@ function displayQuestion(input) {
         document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
     }
 
-    updateChildQuestions();
-
 }
 
 
@@ -206,67 +205,53 @@ function displayPictures(input) {
 
 
 /**
- * if a questions' answer is changed, we delete all questions on the page that are
- * not directly a child of the question answered.
+ * This function allows a user to go back anywhere in the form and change their answer.
+ *
+ * After every selection this question is called which deletes any child questions that
+ * don't belong on the page
  */
 function updateChildQuestions() {
     "use strict";
 
     let all_questions = document.getElementsByClassName("question");
     let length = all_questions.length;
-    let should_delete = false; // boolean flag
-
-    let wrapper = document.getElementById("question-content");
+    let delete_index = -1;
 
     for( let i = 0; i < length ; i++ ){
+
         const curr_question = all_questions[i]; // grabs the question name from the label
-
-
-
-        const label = curr_question.children[0].innerHTML;
-        const selected = curr_question.children[1].value;
-
-
-        // console.log("curr question: " + label);
+        const selected = curr_question.children[1].value; // the option selected
 
         const curr_children = dict[selected]; // get the children of the choice
 
+        if(curr_children !== undefined && all_questions[i+1] !== undefined){ // ignores the blank default option
 
-        if(!should_delete){
+            const next_question = all_questions[i+1].children[0].innerHTML; // grab the lable of the question element
 
-            //if( i+1 <= length){ // prevent index out of bounds
-
-                const next_question = all_questions[i+1];
-
-                if(next_question !== undefined) {
-                    const next_label = next_question.children[0].innerHTML;
-
-
-                    if(!curr_children.includes(next_label) && next_label !== selected){
-                        console.log(next_label+ " doesn't belong");
-                        should_delete = true;
-
-                    }
-
-                }
-
-            //}
+            // if the next question is not a child of the current one (ecluding itself)
+            if(!curr_children.includes(next_question) && selected !== next_question){
+                delete_index = i+1;
+                break;
+            }
 
         }
-        else{
-            console.log("deleting: " + label);
-            wrapper.removeChild(wrapper.childNodes[i]);
-
-
-        }
-
-
     }
 
+    // if delete_index is greater than -1 then we know that we found a question
+    // doesn't belong on the current page
+    if(delete_index > 0) {
 
+        let wrapper = document.getElementById("question-content"); // grab the parent
+        let counter = wrapper.childElementCount;    // get the childnode count
 
+        // step backwards from the end of the list up until the delete index
+        while(wrapper.lastChild && counter > delete_index){
+            wrapper.removeChild(wrapper.lastChild);
+            counter--;
+        }
+
+    }
 }
-
 
 
 

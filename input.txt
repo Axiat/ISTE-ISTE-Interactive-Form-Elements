@@ -38,8 +38,8 @@
                 D-Sub question 2 | 2a-1
 
 
-                    2a-1-a: Question F | 2a-1
-                    blank question   | 2a-1-a
+                    2a-1a: Question F | 2a-1
+                    blank question    | 2a-1a
 
 
         2b: Question C  | 1              | Level2/W.png
