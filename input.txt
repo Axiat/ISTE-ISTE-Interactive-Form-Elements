@@ -27,27 +27,32 @@
 // Level 1 Questions
 1: Question A  | 1
 
+
+
         // Level 2 Questions
-        2a: Question B  | 1              |   pug.jpg  , penguins.jpg
-        B-sub question 1 | 2a
-        B-sub question 2 | 2a
+        1.1: Question B  | 1              |   pug.jpg  , penguins.jpg
+        B-sub question 1 | 1.1
+        B-sub question 2 | 1.1
+
 
                // Level 3 Questions
-                2a-1: Question D | 2a
-                D-sub question 1 | 2a-1
-                D-Sub question 2 | 2a-1
+                1.1.1: Question D | 1.1
+                D-sub question 1 | 1.1.1
+                D-Sub question 2 | 1.1.1
 
 
-                    2a-1a: Question F | 2a-1
-                    blank question    | 2a-1a
+                       1.1.1.1: Question F | 1.1.1
+                       blank question    |  1.1.1.1
 
 
-        2b: Question C  | 1              | Level2/W.png
-        C-sub question 1 | 2b
-        C-sub question 2 | 2b
 
-                2b-3: Question E | 2b
-                E-sub question 1 | 2b-3
-                E-sub question 2 | 2b-3
+        1.2: Question C  | 1              | Level2/W.png
+        C-sub question 1 | 1.2
+        C-sub question 2 | 1.2
+
+
+                1.2.1: Question E | 1.2
+                E-sub question 1 | 1.2.1
+                E-sub question 2 | 1.2.1
 
 
