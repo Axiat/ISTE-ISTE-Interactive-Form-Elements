@@ -171,6 +171,60 @@ function displayQuestion(input) {
 }
 
 
+
+
+
+/**
+ * This function allows a user to go back anywhere in the form and change their answer.
+ *
+ * After every selection this question is called which deletes any child questions that
+ * don't belong on the page
+ */
+function updateChildQuestions() {
+    "use strict";
+
+    let all_questions = document.getElementsByClassName("question");
+    let length = all_questions.length;
+    let delete_index = -1;
+
+    for( let i = 0; i < length ; i++ ){
+
+        const curr_question = all_questions[i]; // grabs the question name from the label
+        const selected = curr_question.children[1].value; // the option selected
+
+        const curr_children = dict[selected]; // get the children of the choice
+
+        if(curr_children !== undefined && all_questions[i+1] !== undefined){ // ignores the blank default option
+
+            const next_question = all_questions[i+1].children[0].textContent; // grab the lable of the question element
+
+            // if the next question is not a child of the current one (ecluding itself)
+            if(!curr_children.includes(next_question) && selected !== next_question){
+                delete_index = i+1;
+                break;
+            }
+
+        }
+    }
+
+    // if delete_index is greater than -1 then we know that we found a question
+    // doesn't belong on the current page
+    if(delete_index > 0) {
+
+        let wrapper = document.getElementById("question-content"); // grab the parent
+        let counter = wrapper.childElementCount;    // get the childnode count
+
+        // step backwards from the end of the list up until the delete index
+        while(wrapper.lastChild && counter > delete_index){
+            wrapper.removeChild(wrapper.lastChild);
+            counter--;
+        }
+
+    }
+}
+
+
+
 /**
  * Iterates through the pictures dictionary and displays any and all photos associated with this
  * question
@@ -203,55 +257,6 @@ function displayPictures(input) {
 
 }
 
-
-/**
- * This function allows a user to go back anywhere in the form and change their answer.
- *
- * After every selection this question is called which deletes any child questions that
- * don't belong on the page
- */
-function updateChildQuestions() {
-    "use strict";
-
-    let all_questions = document.getElementsByClassName("question");
-    let length = all_questions.length;
-    let delete_index = -1;
-
-    for( let i = 0; i < length ; i++ ){
-
-        const curr_question = all_questions[i]; // grabs the question name from the label
-        const selected = curr_question.children[1].value; // the option selected
-
-        const curr_children = dict[selected]; // get the children of the choice
-
-        if(curr_children !== undefined && all_questions[i+1] !== undefined){ // ignores the blank default option
-
-            const next_question = all_questions[i+1].children[0].innerHTML; // grab the lable of the question element
-
-            // if the next question is not a child of the current one (ecluding itself)
-            if(!curr_children.includes(next_question) && selected !== next_question){
-                delete_index = i+1;
-                break;
-            }
-
-        }
-    }
-
-    // if delete_index is greater than -1 then we know that we found a question
-    // doesn't belong on the current page
-    if(delete_index > 0) {
-
-        let wrapper = document.getElementById("question-content"); // grab the parent
-        let counter = wrapper.childElementCount;    // get the childnode count
-
-        // step backwards from the end of the list up until the delete index
-        while(wrapper.lastChild && counter > delete_index){
-            wrapper.removeChild(wrapper.lastChild);
-            counter--;
-        }
-
-    }
-}
 
 
 
