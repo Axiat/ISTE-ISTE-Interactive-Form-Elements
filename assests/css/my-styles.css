@@ -118,6 +118,11 @@ body{
     padding: 10px;
 }
 
+#title b{
+    color: #FFCC00;
+    font-style: italic;
+}
+
 #content{
     margin: auto;
     width:50%;
