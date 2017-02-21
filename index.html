@@ -10,6 +10,46 @@
     <!-- All Javascript imports -->
     <script src="assests/js/project.js" async></script>
 
+
+
+    <!--[if lt IE 9]>
+        <script>
+            var ltIE9 = true;
+            alert("you are using an old browser. Please install a new browser");
+            window.location = "http://outdatedbrowser.com/en";
+        </script>
+    <![endif]-->
+
+    <!--<script>-->
+
+        <!--// if cookie does not exist, the user has not been here before-->
+        <!--if( GetCookie('user_id') == null) {-->
+
+            <!--// get the users's nickname-->
+            <!--var getName = prompt("Hello!, what is your name?");-->
+            <!--document.write('<h2> welcome ' + getName + '! This is your first time here</h2>');-->
+            <!--// set the cookie(s)-->
+            <!--SetCookie('user_id', getName);-->
+            <!--SetCookie('hit_count', '1');-->
+        <!--}-->
+        <!--// else we ahve a return visior-->
+        <!--else {-->
+            <!--// get the nickname-->
+            <!--var getName = GetCookie('user_id');-->
+            <!--// get how many visits they have had here-->
+            <!--var getHits = GetCookie('hit_count');-->
+            <!--getHits = parseInt(getHits) + 1;-->
+            <!--// tell them that big brother is tracking them-->
+            <!--document.write('<h2> welcome back! ' + getName + ' you have visited ' + getHits+ ' times.</h2>');-->
+            <!--// Set the cookie with an updated count.-->
+            <!--SetCookie('hit_count',getHits);-->
+        <!--}-->
+
+    <!--</script>-->
+
+
+
+
 </head>
 <body>
 
