@@ -16,12 +16,15 @@
 
 body{
     font-family: Arial, Helvetica, sans-serif;
-    background: #667D95;
+
+    background-image:url(../images/background/dark-forest.jpg);
+
 }
 
 
 .row {
     width: 100%;
+    text-align: center;
 }
 
 
@@ -37,7 +40,7 @@ body{
 
 
 .question-select{
-    clear: left;
+    margin-bottom: 10px;
 }
 
 
@@ -45,16 +48,22 @@ body{
     color: #475768;
     font-weight: bold;
     text-align: center;
+    margin: auto;
+    margin-bottom: 10px;
 }
 
 .question{
 
-    border: 10px solid #EFF2F4;
+    border: 10px solid #101624;/*#D7D9DB; */ /*#EFF2F4;*/
     border-radius: 5px;
-    background: white;
+    background: #D7D9DB;
     margin: 10px;
     padding: 20px;
 
+}
+
+.message{
+    margin-bottom: 10px;
 }
 
 /* Used this tutorial to create the animation effects --> https://www.tutorialspoint.com/css/css_animation_fade_in_left.htm*/
@@ -104,7 +113,8 @@ body{
 
 #title{
     text-align: center;
-    background: #EFF2F4;
+    background: #101624;
+    color: #EFF2F4;
     padding: 10px;
 }
 
@@ -115,7 +125,8 @@ body{
 }
 
 .picture-container img{
-    width:30%;
+    width: 45%;
+    margin: 5px;
 }
 
 
@@ -125,4 +136,10 @@ main {
     width: 80%;
 }
 
+
+.reset-button{
+    width: 30%;
+    height: 30px;
+
+}
 

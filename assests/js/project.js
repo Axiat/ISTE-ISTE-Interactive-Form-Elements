@@ -136,10 +136,33 @@ function buildDataModel(text) {
 }
 
 
+/**
+ * Resets the content back to the original question
+ */
+function reset() {
+    "use strict";
+
+    const parent = document.getElementById("content");
+
+    // delete everything in the div with the id, "content"
+    while(parent.firstChild){
+        parent.removeChild(parent.firstChild);
+    }
+
+    // display the first question
+    displayFistQuestion();
+}
 
 
 function displayFistQuestion() {
     "use strict";
+
+    const reset_button = document.createElement("button");
+    reset_button.appendChild(   document.createTextNode("Reset!")   );
+    reset_button.className = "reset-button";
+    reset_button.onclick = function () {
+        reset();
+    };
 
     const firstQuestion = Object.keys(dict)[0]; // grabs the first element out of the dictionary
 
@@ -148,6 +171,7 @@ function displayFistQuestion() {
     div.id = "question-content";
     div.className = "question-wrapper";
 
+    document.getElementById("content").appendChild(reset_button);
     document.getElementById("content").appendChild(div);   // add the new div to the page
 
     displayQuestion(firstQuestion); // once the wrapper is in place, we can start displaying questions
@@ -169,8 +193,17 @@ function displayQuestion(input) {
     // append optional message to question
     const msg_div = document.createElement("div");
     msg_div.className = "message";
-    displayMessage(question,msg_div);
-    question_div.appendChild(msg_div);
+
+    // grab the message assigned to this question
+    const msg = messages[question];
+
+    // if a message for this question exists
+    if(msg !== undefined){
+        msg_div.appendChild(
+            document.createTextNode(msg)
+        );
+    }
+    question_div.appendChild(msg_div); // append msg div
 
     // generate any pictures associated with this question
     const pic_div = document.createElement("div");
@@ -301,26 +334,6 @@ function displayPictures(input, div) {
     }
 
 }
-
-
-function displayMessage(input,div) {
-    "use strict";
-
-    const question = input;
-    const msg_div = div;
-
-    // grab the message assigned to this question
-    const msg = messages[question];
-
-    // if a message for this question exists
-    if(msg !== undefined){
-        msg_div.appendChild(
-            document.createTextNode(msg)
-        );
-    }
-
-}
-
 
 
 /**
