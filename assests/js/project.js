@@ -1,8 +1,8 @@
 /*jshint esversion: 6 */
 
-const dict = [];     // global dictionary holds the parent -> [children] relationship
+const dict = [];          // global dictionary holds the parent -> [children] relationship
 const pictures = [];      // contains all the picures and the question they are associated with
-
+const messages = [];      // global dictionary which associates each parent to an optional message
 
 /**
  * Gets passed int the input file as raw text and builds up the data model.
@@ -13,12 +13,16 @@ const pictures = [];      // contains all the picures and the question they are 
 function buildDataModel(text) {
     "use strict";
     const text_array = text;
-    const arrayLenth = text_array.length;
+    const array_length = text_array.length;
 
     const used_elements = []; // keps track of used keys in the dictionary
     const aliases = [];       // keeps track of the aliases assigned in the input file
 
-    for( let i = 0; i < arrayLenth; i++ ){
+    const msg_beginning = "text[";  // denotes the syntax used to declare a message
+    const msg_end = "]";
+
+
+    for( let i = 0; i < array_length; i++ ){
         const line = text_array[i];
         if (!line.includes("//") && line.length > 0){ // ignore all commented out lines and empty lines
 
@@ -69,11 +73,11 @@ function buildDataModel(text) {
             }
 
 
-            // If there are pictures given for this question
-            if(parsed_line.length > 2){
+            // If there are pictures given for this question a
+            if(parsed_line.length > 2 && parsed_line[2].length > 0){
+
                 const picture_list = parsed_line[2].trim().split(",");
                 const list_length = picture_list.length;
-
 
                 for( let i=0; i < list_length ; i++ ){
                     const picture_name = picture_list[i].trim();
@@ -90,12 +94,52 @@ function buildDataModel(text) {
             }
 
 
+            // checks if there is a message associated with this question
+            if(parsed_line.length > 3 && parsed_line[3].length > 0){
+                const raw_message = parsed_line[3].trim();
+
+                // if message is all on one line
+                if(raw_message.includes(msg_beginning) && raw_message.includes(msg_end)){
+
+                    // remove "text[" and "]" from the string
+                    let parsed_message = raw_message.replace(msg_beginning,"");
+                    parsed_message = parsed_message.replace(msg_end,"").trim();
+
+                    // add the parsed message to the dictionary
+                    messages[element] = parsed_message;
+
+                }
+                else if(raw_message.includes(msg_beginning) && !raw_message.includes(msg_end)){
+
+                    const return_data = buildMultiLineMessage(text_array,array_length,i,msg_beginning,msg_end);
+                    const message = return_data[0];
+                    const line_number = return_data[1];
+
+                    // update the line number, which essentially skips to the line which
+                    // the buildMultiLineMessage() function leaves off at.
+                    i = line_number;
+
+                    // add message to the dictionary
+                    messages[element] = message;
+                }
+                else{
+                    console.log("Unexpected message format");
+                }
+
+            }
+
 
         }
+
+
+
     }
 
     displayFistQuestion(); // as soon as the data model is complete, display the first question
 }
+
+
+
 
 function displayFistQuestion() {
     "use strict";
@@ -119,6 +163,9 @@ function displayQuestion(input) {
     updateChildQuestions();
 
     const question = input;
+
+    // display any message that optionally can be associated with this question
+    displayMessage(question);
 
     // generate any pictures associated with this question
     displayPictures(question);
@@ -255,6 +302,77 @@ function displayPictures(input) {
 
     }
 
+}
+
+
+function displayMessage(input) {
+    "use strict";
+
+    // grab the div element which will display the message
+    const msg_div = document.getElementById("message");
+
+    // clear old messages
+    while(msg_div.firstChild){
+        msg_div.removeChild(msg_div.firstChild);
+    }
+
+
+    //////////////////////////////////////////
+    const question = input;
+
+    // grab the message assigned to this question
+    const msg = messages[question];
+
+    // if a message for this question exists
+    if(msg !== undefined){
+        msg_div.appendChild(
+            document.createTextNode(msg)
+        );
+    }
+
+}
+
+
+
+/**
+ * This function is used to parse and build up multi-line messages which can be assigned
+ * to a question in the input.txt file
+ *
+ * @param text_array    -> the file represented as an array of strings
+ * @param text_length   -> length of the "text_array"
+ * @param line_number   -> the index of the beginning of the multi-line message
+ * @param msg_beginning -> the string used to represent the beginning of a multiline message
+ * @param msg_end       -> the string used to represent the end of a multiline message
+ * @returns {message,line_number} -> returns the message and the line_number that contains the msg_end string
+ */
+function buildMultiLineMessage(text_array,text_length,line_number, msg_beginning, msg_end) {
+    "use strict";
+    const msg_beginning_length = msg_beginning.length;
+    let raw_message = "";
+
+    for(let i = line_number ; i < text_length ; i++ ){ // iterate over each line
+
+        const line = text_array[i];
+        const length = line.length;
+
+        /* we add the length of msg_beginning to the start index, so we start copying after
+         * we see the msg_beginning string.
+         */
+        const start_index = line.indexOf(msg_beginning) + msg_beginning_length;
+
+        for (let k = start_index ; k < length; k++) {   // iterate over each char in the line
+
+            const char = line[k];
+
+            if (char !== msg_end) {   // copy over characters until we hit the msg_end symbol
+                raw_message += char;
+            }
+            else{
+                return [raw_message.trim(), i]; // return the message and the line number
+            }
+        }
+
+    }
 }
 
 

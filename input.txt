@@ -5,12 +5,13 @@
 //
 //  3.) All entries must have a parent. Setting a question as it's own parent
 //      is a good way to fill this requirement without any negative effects.
-//          Ex.) "my question" | "my question | picture1, picture2"
+//          Ex.) "my question" | "my question | picture1, picture2 |"
 //            - if a picture is not in the top level directory of the assets/images/ folder,
 //              then write the path to the picture instead.
 //
-//  4.) Each line is written in the format:   " question | parent | pictures"
-//      - Pictures part is completely optional
+//  4.) Each line is written in the format:   " question | parent | pictures | text[ (your message here) ]"
+//      - Pictures and tex[]  part is completely optional, but if you use text[], you must leave
+//        the picture part empty.
 //      - It's worth noting that you can alias a question
 //        to prevent unneeded repetition by using the syntax
 //        "alias : question". White space does not matter and
@@ -21,13 +22,18 @@
 //
 //  5.) should you choose to alias a question, you must use the alias to refer
 //      to the original question
+//
+//  6.) Assigning a message to a question is optional, but if you choose to do so, there
+//      are a few rules.
+//          1.) you must use the syntax "text[ (your message here ]" to denote a message
+//          2.) you can have multi-line messages (helps with formatting long messages in this file)
+//              2a.) If you choose to do a multi-line message, you must leave the "text[" string in
+//                   in the same line as the question you want it to be assigned to.
 
 
 
 // Level 1 Questions
-1: Question A  | 1
-
-
+1: Question A  | 1 |
 
         // Level 2 Questions
         1.1: Question B  | 1              |   pug.jpg  , penguins.jpg
@@ -41,12 +47,14 @@
                 D-Sub question 2 | 1.1.1
 
 
-                       1.1.1.1: Question F | 1.1.1
+                       1.1.1.1: Question F | 1.1.1 || text[
+                                                            an inline message
+                                                          ]
                        blank question    |  1.1.1.1
 
 
 
-        1.2: Question C  | 1              | Level2/W.png
+        1.2: Question C  | 1              | Level2/W.png|  text[ here is a message ]
         C-sub question 1 | 1.2
         C-sub question 2 | 1.2
 
