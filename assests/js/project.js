@@ -109,6 +109,7 @@ function buildDataModel(text) {
                     messages[element] = parsed_message;
 
                 }
+                // if message is a multi-line message
                 else if(raw_message.includes(msg_beginning) && !raw_message.includes(msg_end)){
 
                     const return_data = buildMultiLineMessage(text_array,array_length,i,msg_beginning,msg_end);
@@ -122,10 +123,6 @@ function buildDataModel(text) {
                     // add message to the dictionary
                     messages[element] = message;
                 }
-                else{
-                    console.log("Unexpected message format");
-                }
-
             }
 
 
@@ -148,8 +145,8 @@ function displayFistQuestion() {
 
     // create container div
     const div = document.createElement("div");
-    div.className = "question-wrapper";
     div.id = "question-content";
+    div.className = "question-wrapper";
 
     document.getElementById("content").appendChild(div);   // add the new div to the page
 
@@ -164,21 +161,26 @@ function displayQuestion(input) {
 
     const question = input;
 
-    // display any message that optionally can be associated with this question
-    displayMessage(question);
-
-    // generate any pictures associated with this question
-    displayPictures(question);
 
     // create div that holds an individual question
     const question_div = document.createElement("div");
     question_div.className = "question";
 
+
+    // append optional message to question
+    const msg_div = document.createElement("div");
+    msg_div.className = "message";
+    displayMessage(question,msg_div);
+
+    // generate any pictures associated with this question
+    const pic_div = document.createElement("div");
+    pic_div.className = "picture-container";
+    displayPictures(question,pic_div);
+
     // create label and assign css class
     const label  = document.createElement("label");
     label.appendChild(  document.createTextNode( question ) );
     label.className = "question-label";
-
 
 
     // create select and option elements for each child question
@@ -209,12 +211,13 @@ function displayQuestion(input) {
         // Append the new label and subquestions to the div
         question_div.appendChild(label);
         question_div.appendChild(selectList);
-
-        //delete dict[question];  // once a question is asked, remove it
-
-        document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
     }
 
+
+    // attach children
+    question_div.appendChild(msg_div);
+    question_div.appendChild(pic_div);
+    document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
 }
 
 
@@ -277,19 +280,20 @@ function updateChildQuestions() {
  * question
  * @param input
  */
-function displayPictures(input) {
+function displayPictures(input, div) {
     "use strict";
 
-    // remove old photos from previous question
-    const pic_div = document.getElementById("picture-div");
-    while(pic_div.firstChild){
-        pic_div.removeChild(pic_div.firstChild);
-    }
+    // // remove old photos from previous question
+    // const pic_div = document.getElementById("picture-div");
+    // while(pic_div.firstChild){
+    //     pic_div.removeChild(pic_div.firstChild);
+    // }
 
 
     //////////////////////////////
     const question = input;
     const picture_array = pictures[question];
+    const pic_div = div;
 
     if(picture_array !== undefined){
         const length = picture_array.length;
@@ -297,7 +301,8 @@ function displayPictures(input) {
             const picture = document.createElement("img");
             picture.src = "assests/images/" + picture_array[i];
             picture.alt = "pic";
-            document.getElementById("picture-div").appendChild(picture);
+            pic_div.appendChild(picture);
+            //document.getElementById("picture-div").appendChild(picture);
         }
 
     }
@@ -305,20 +310,21 @@ function displayPictures(input) {
 }
 
 
-function displayMessage(input) {
+function displayMessage(input,div) {
     "use strict";
 
-    // grab the div element which will display the message
-    const msg_div = document.getElementById("message");
-
-    // clear old messages
-    while(msg_div.firstChild){
-        msg_div.removeChild(msg_div.firstChild);
-    }
+    // // grab the div element which will display the message
+    // const msg_div = document.getElementById("message");
+    //
+    // // clear old messages
+    // while(msg_div.firstChild){
+    //     msg_div.removeChild(msg_div.firstChild);
+    // }
 
 
     //////////////////////////////////////////
     const question = input;
+    const msg_div = div;
 
     // grab the message assigned to this question
     const msg = messages[question];
