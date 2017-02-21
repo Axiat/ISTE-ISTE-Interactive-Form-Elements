@@ -285,14 +285,6 @@ function updateChildQuestions() {
 function displayPictures(input, div) {
     "use strict";
 
-    // // remove old photos from previous question
-    // const pic_div = document.getElementById("picture-div");
-    // while(pic_div.firstChild){
-    //     pic_div.removeChild(pic_div.firstChild);
-    // }
-
-
-    //////////////////////////////
     const question = input;
     const picture_array = pictures[question];
     const pic_div = div;
@@ -315,16 +307,6 @@ function displayPictures(input, div) {
 function displayMessage(input,div) {
     "use strict";
 
-    // // grab the div element which will display the message
-    // const msg_div = document.getElementById("message");
-    //
-    // // clear old messages
-    // while(msg_div.firstChild){
-    //     msg_div.removeChild(msg_div.firstChild);
-    // }
-
-
-    //////////////////////////////////////////
     const question = input;
     const msg_div = div;
 
