@@ -36,25 +36,23 @@
 1: Question A  | 1 || text[ here is a message ]
 
         // Level 2 Questions
-        1.1: Question B  | 1              |   pug.jpg  , penguins.jpg
+        1.1: Question A-1| 1              |   pug.jpg  , penguins.jpg
         B-sub question 1 | 1.1
         B-sub question 2 | 1.1
 
 
                // Level 3 Questions
                 1.1.1: Question D | 1.1
-                D-sub question 1 | 1.1.1
-                D-Sub question 2 | 1.1.1
+                Question D-1| 1.1.1
+                Question D-2 | 1.1.1
 
 
-                       1.1.1.1: Question F | 1.1.1 || text[
-                                                            an inline message
-                                                          ]
+                       1.1.1.1: Question F | 1.1.1 || text[an inline message]
                        blank question    |  1.1.1.1
 
 
 
-        1.2: Question C  | 1              | Level2/W.png
+        1.2: Question A-2  | 1              | Level2/W.png
         C-sub question 1 | 1.2
         C-sub question 2 | 1.2
 

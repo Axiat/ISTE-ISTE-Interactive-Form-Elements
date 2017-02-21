@@ -157,15 +157,14 @@ function displayFistQuestion() {
 
 function displayQuestion(input) {
     "use strict";
+
     updateChildQuestions();
 
     const question = input;
 
-
     // create div that holds an individual question
     const question_div = document.createElement("div");
     question_div.className = "question";
-
 
     // append optional message to question
     const msg_div = document.createElement("div");
@@ -188,7 +187,10 @@ function displayQuestion(input) {
     selectList.className = "question-select";
 
     // set the default choice is blank
-    selectList.appendChild( document.createElement("option"));
+    const blank_choice = document.createElement("option");
+    blank_choice.disabled = true;
+    blank_choice.selected = " ";
+    selectList.appendChild( blank_choice );
 
     const children = dict[question];
 
