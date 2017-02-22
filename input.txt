@@ -33,26 +33,29 @@
 
 
 // Level 1 Questions
-1: Question A- what do you do? | 1 || text[ So here is the very very very long situation ]
+1: Introduction | 1 || text[
+                            You’re jolted awake by the intense ringing in your ears. Groggy and disoriented,
+                            you gather yourself and look around – taking in your surroundings. You notice that
+                            you're leaning up against a small boulder. You have no idea where you are or how you go
+                            there. Off in the distance you hear a single low-pitched whistle.
+                          ]
 
         // Level 2 Questions
-        1.1: Question A-1| 1              |   pug.jpg  , penguins.jpg
-        B-sub question 1 | 1.1
-        B-sub question 2 | 1.1
-
-
-               // Level 3 Questions
-                1.1.1: Question D | 1.1
-                Question D-1| 1.1.1
-                Question D-2 | 1.1.1
-
-
-                       1.1.1.1: Question F | 1.1.1
-                       blank question    |  1.1.1.1 || text[an inline message]
+        1.1: Immediately start running away from the sound  | 1 | pug.jpg  , penguins.jpg | text[
+                                                                                                  Naturally you're able to put two and two together and given current scenario,
+                                                                                                  determine that this menacing sound can’t be good. So, you begin running away as
+                                                                                                  quickly as possible. Only the thick layer of fog prevents you from
+                                                                                                  going into a full-on sprint. You quickly find a long-abandoned path and follow it.
+                                                                                                   Not so long afterwards, you encounter a fork in the path. You notice that the
+                                                                                                   left path leads to higher ground, while the right path seems to snake deeper into forest.
+                                                                                                ]
+        Left Path  | 1.1 || text[ left path.. ]
+        Right Path | 1.1 || text[ right path.. ]
 
 
 
-        1.2: Question A-2  | 1              | Level2/W.png
+
+        1.2: Decide to take a moment and search the nearby area | 1 | Level2/W.png
         C-sub question 1 | 1.2
         C-sub question 2 | 1.2
 
@@ -60,5 +63,8 @@
                 1.2.1: Question E | 1.2
                 E-sub question 1 | 1.2.1
                 E-sub question 2 | 1.2.1
+
+        1.3: Stay put and investigate the origin of the sound  | 1 || text[ testing.. testing..]
+        fill in | 1.3 || text[ example text]
 
 

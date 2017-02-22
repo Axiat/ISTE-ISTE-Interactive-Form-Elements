@@ -48,9 +48,8 @@ body{
 .question-label{
     color: #475768;
     font-weight: bold;
+    font-size: 1.2em;
     text-align: center;
-    margin: auto;
-    margin-bottom: 10px;
 }
 
 .question{
@@ -64,6 +63,7 @@ body{
 }
 
 .message{
+    margin-top: 15px;
     margin-bottom: 10px;
 }
 
@@ -126,7 +126,7 @@ body{
 
 #content{
     margin: auto;
-    width:50%;
+    width:65%;
     margin-top: 50px;
 }
 
@@ -149,3 +149,9 @@ main {
 
 }
 
+
+
+select {
+    margin-top: 10px;
+    width: 80%;
+}

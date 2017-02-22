@@ -158,7 +158,7 @@ function displayFistQuestion() {
     "use strict";
 
     const reset_button = document.createElement("button");
-    reset_button.appendChild(   document.createTextNode("Reset!")   );
+    reset_button.appendChild(   document.createTextNode("Restart!")   );
     reset_button.className = "reset-button";
     reset_button.onclick = function () {
         reset();
@@ -203,7 +203,6 @@ function displayQuestion(input) {
             document.createTextNode(msg)
         );
     }
-    question_div.appendChild(msg_div); // append msg div
 
     // generate any pictures associated with this question
     const pic_div = document.createElement("div");
@@ -246,12 +245,19 @@ function displayQuestion(input) {
 
         // Append the new label and subquestions to the div
         question_div.appendChild(label);
+        question_div.appendChild(msg_div); // append msg div
         question_div.appendChild(selectList);
+        question_div.appendChild(pic_div);
+    }
+    else{  // if the question has child questions, essentially the last child node in the tree
+
+        question_div.appendChild(label);
+        question_div.appendChild(msg_div); // append msg div
+        question_div.appendChild(pic_div);
     }
 
 
-    // attach children
-    question_div.appendChild(pic_div);
+
     document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
 }
 
@@ -275,13 +281,15 @@ function updateChildQuestions() {
     for( let i = 0; i < length ; i++ ){
 
         const curr_question = all_questions[i]; // grabs the question name from the label
-        const selected = curr_question.children[2].value; // the option selected
+
+
+        let selected = curr_question.children[2].value; // the option selected
 
         const curr_children = dict[selected]; // get the children of the choice
 
         if(curr_children !== undefined && all_questions[i+1] !== undefined){ // ignores the blank default option
 
-            const next_question = all_questions[i+1].children[1].textContent; // grab the lable of the question element
+            const next_question = all_questions[i+1].children[0].textContent; // grab the lable of the question element
 
             // if the next question is not a child of the current one (ecluding itself)
             if(!curr_children.includes(next_question) && selected !== next_question){
@@ -289,6 +297,10 @@ function updateChildQuestions() {
                 break;
             }
 
+        }
+        else{ // delete question regardless, b/c the question was still changed
+            delete_index = i+1;
+            break;
         }
     }
 
