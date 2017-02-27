@@ -52,6 +52,13 @@ body{
     text-align: center;
 }
 
+.question-label.dead{
+    color: #ffffff;
+}
+.question-label.survive{
+    color: #ffffff;
+}
+
 .question{
 
     border: 10px solid #101624;/*#D7D9DB; */ /*#EFF2F4;*/
@@ -60,6 +67,16 @@ body{
     margin: 10px;
     padding: 20px;
 
+}
+
+.question.dead{
+    background: #FF0000;
+    color: #ffffff;
+}
+
+.question.survive{
+    background: #4CA64C;
+    color: #ffffff;
 }
 
 .message{

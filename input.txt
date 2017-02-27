@@ -38,20 +38,88 @@
                             you gather yourself and look around – taking in your surroundings. You notice that
                             you're leaning up against a small boulder. You have no idea where you are or how you go
                             there. Off in the distance you hear a single low-pitched whistle.
-                          ]
+                           ]
+
 
         // Level 2 Questions
-        1.1: Immediately start running away from the sound  | 1 | pug.jpg  , penguins.jpg | text[
-                                                                                                  Naturally you're able to put two and two together and given current scenario,
-                                                                                                  determine that this menacing sound can’t be good. So, you begin running away as
-                                                                                                  quickly as possible. Only the thick layer of fog prevents you from
-                                                                                                  going into a full-on sprint. You quickly find a long-abandoned path and follow it.
-                                                                                                   Not so long afterwards, you encounter a fork in the path. You notice that the
-                                                                                                   left path leads to higher ground, while the right path seems to snake deeper into forest.
-                                                                                                ]
-        Left Path  | 1.1 || text[ left path.. ]
-        Right Path | 1.1 || text[ right path.. ]
+        1.1: Immediately start running away from the sound  | 1 || text[
+                                                                          Naturally you're able to put two and two together and given current scenario,
+                                                                          determine that this menacing sound can’t be good. So, you begin running away as
+                                                                          quickly as possible.
+                                                                        ]
+                1.1.1: Continue running | 1.1|| text[
+                                                     You quickly find a long-abandoned path and follow it.
+                                                     Not so long afterwards, you encounter a fork in the path. You notice that the
+                                                     left path leads to higher ground, while the right path seems to snake deeper into forest.
+                                                    ]
 
+                                   1.1.1.1:  Left Path  | 1.1.1 || text[
+                                                                         As you take the path, you hear the low-pitched whistle again.
+                                                                         You notice It sounds much closer.
+                                                                       ]
+                                              Keep Moving |1.1.1.1|| text[
+                                                                          You begin to run faster, looking behind you as you hear this sound approach.
+                                                                          You jump in-between a pair of trees and continue to fall. You now realize
+                                                                          that you just unknowingly jumped off a 70ft cliff. YOU DIED.
+                                                                         ]
+
+                                              Catch your breath |1.1.1.1|| text[
+                                                                                You hear a high-pitched whistle this time and you immediately get
+                                                                                a salty taste in your mouth. You look down and see an arrow sticking
+                                                                                out of your chest. YOU DIED.
+                                                                               ]
+
+                                   1.1.1.2:  Right Path | 1.1.1 || text[
+                                                                         You hear the same low-pitched whistle as you continue to move deeper into the forest.
+                                                                         You soon discover an empty cabin.
+                                                                       ]
+                                             1.1.1.2.1: Enter the cabin |1.1.1.2|| text[
+                                                                                        You enter the abandoned cabin and discover a handgun and some rounds.
+                                                                                        Upon further investigation, you realize that this an abandoned ranger
+                                                                                        station and find a Ham radio. You suddenly hear the that unnerving whistle
+                                                                                        getting closer.
+                                                                                       ]
+                                                        Hide| 1.1.1.2.1 || text[
+                                                                                 You quickly grab the gun and hide in a nearby closet. You hear nothing for a couple of minutes.
+                                                                                 Suddenly you hear footsteps enter the house. You pull back the hammer on your gun and get ready
+                                                                                 for the fight of your life.
+                                                                               ]
+                                                                Continue to hide | Hide ||text[
+                                                                                                You decide to keep hiding and see if they’ll leave. Suddenly a
+                                                                                                spear is shoved through the door and straight into your chest.
+                                                                                                You’re so surprised that you barely feel the spear. YOU DIED.
+                                                                                             ]
+                                                                Jump out and start shooting |Hide||text[
+                                                                                                        You throw the closet door open and step out with your gun
+                                                                                                        pointed at eye level. You suddenly feel a get shoved into
+                                                                                                        your back and see the spear head protrude from your chest.
+                                                                                                        They were right behind you. YOU DIED.
+                                                                                                       ]
+
+                                                        Load up and go out guns blazing | 1.1.1.2.1 || text[
+                                                                                                            You wait until whatever that’s been chasing you gets closer.
+                                                                                                            As soon as you could hear footsteps, you get the gun and run
+                                                                                                            out the door. You wildly shoot in the direction of the sound.
+                                                                                                            Through some sheer dumb luck, you manage to land a kill shot.
+                                                                                                            Whoever was chasing you is now dead. YOU SURVIVED!
+                                                                                                           ]
+
+
+                                             1.1.1.2.2: Ignore it and keep moving |1.1.1.2|| text[
+                                                                                                  You decide to ignore the creepy-looking cabin and continue.  You decide to
+                                                                                                   keep moving. Suddenly you feel a sharp pain in your foot; you just stepped
+                                                                                                   into a bear trap.
+                                                                                                 ]
+                                                           Try to remove leg from bear trap | 1.1.1.2.2 || text[
+                                                                                                                You grab your leg in agony and desperately try to free yourself.
+                                                                                                                Your vision begins to go blurry as you begin to bleed out. You
+                                                                                                                hear footsteps approaching and turn around. You can’t believe it;
+                                                                                                                your hunter appears to cannibalistic native covered in war paint.
+                                                                                                                He looks at you with his empty eyes and watches you bleed out. YOU DIED.
+                                                                                                               ]
+
+
+////////////////////////////////////////////////////////            End of Path 1      ///////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 

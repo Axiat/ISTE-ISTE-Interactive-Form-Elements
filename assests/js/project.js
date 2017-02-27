@@ -132,6 +132,7 @@ function buildDataModel(text) {
 
     }
 
+
     displayFistQuestion(); // as soon as the data model is complete, display the first question
 }
 
@@ -196,9 +197,7 @@ function displayQuestion(input) {
 
     // grab the message assigned to this question
     const msg = messages[question];
-
-    // if a message for this question exists
-    if(msg !== undefined){
+    if(msg !== undefined) {
         msg_div.appendChild(
             document.createTextNode(msg)
         );
@@ -214,6 +213,18 @@ function displayQuestion(input) {
     label.appendChild(  document.createTextNode( question ) );
     label.className = "question-label";
 
+    // apply certain styles if the user selects an option where they die
+    if(msg !== undefined && msg.includes("DIED")){
+      // if the person "dies" in the game
+
+        question_div.className = "question dead";
+        label.className = "question-label dead";
+    }
+    // if the user survives the game, apply these css styles
+    else if(msg !== undefined && msg.includes("SURVIVED")){
+        question_div.className = "question survive";
+        label.className = "question-label survive";
+    }
 
     // create select and option elements for each child question
     const selectList = document.createElement("select");
@@ -399,6 +410,10 @@ function buildMultiLineMessage(text_array,text_length,line_number, msg_beginning
  */
 function readTextFile(file) {
     "use strict";
+
+
+
+    ////////////////////////////////////////////
     const rawFile = new XMLHttpRequest();
     rawFile.open("GET", file, false);
     rawFile.onreadystatechange = function () {
