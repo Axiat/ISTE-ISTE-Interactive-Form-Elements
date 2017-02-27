@@ -123,16 +123,103 @@
 
 
 
-        1.2: Decide to take a moment and search the nearby area | 1 | Level2/W.png
-        C-sub question 1 | 1.2
-        C-sub question 2 | 1.2
+        1.2: Decide to take a moment and search the nearby area | 1 ||text[ You have know idea who or what is coming, but you decide to search
+                                                                            the surrounding area for anything helpful.
+                                                                          ]
 
 
-                1.2.1: Question E | 1.2
-                E-sub question 1 | 1.2.1
-                E-sub question 2 | 1.2.1
 
-        1.3: Stay put and investigate the origin of the sound  | 1 || text[ testing.. testing..]
-        fill in | 1.3 || text[ example text]
+                        1.2.1: Look around a nearby tree | 1.2 || text[ You find nothing interesting and decide to keep searching]
+                        1.2.2: Look around the boulder   | 1.2 || text[
+                                                                        After circuling the boulder, you discover a crevice. After reaching
+                                                                        your hand inside, you find an old and weathered tomahawk. Satisfied
+                                                                        with the results of the search, you decide to get moving.
+                                                                      ]
+                                  1.2.2.1: Head North |1.2.2|| text[
+                                                                     After a couple of minutes, you begin to hear running water.
+                                                                     Not soon after, you run into a flowing river about 50ft wide.
+                                                                     Off to the left you notice a small barge with a single long stick
+                                                                     which functions as a paddle. Suddenly you hear the same low-pitched
+                                                                     whistle louder than ever.
+                                                                   ]
+                                          Try swimming across | 1.2.2.1 ||text[ You make it about halfway before the cold water makes you
+                                                                                cramp up and drown. YOU DIED.
+                                                                              ]
+                                          1.2.2.1.1: Try you luck with the barge | 1.2.2.1||text[
+                                                                                        You quickly run over and launch the barge. The current is stronger
+                                                                                        than you thought, and propels the barge quickly down the river.
+                                                                                        You watch the outline of the man diminish as you travel down the river.
+                                                                                        Overcome with relief, you lay down on the barge and let out a huge sigh of relief.
+                                                                                     ]
+                                                   Take it easy |1.2.2.1.1||text[
+                                                                                 The barge crashes against a large rock and throws you headfirst into
+                                                                                 the waters. The initial crash knocked you unconscious and you drown.
+                                                                                 YOU DIED.
+                                                                                ]
+
+
+                                  1.2.2.2: Head West  |1.2.2|| text[
+                                                                     You keep running until you have to stop to catch your breath.
+                                                                     The low-pitched whistle goes off again, much louder this time.
+                                                                     You begin to feel cornered and quickly begin looking for an out.
+                                                                   ]
+
+                                          1.2.2.2.1: Climb a nearby tree | 1.2.2.2|| text[
+                                                                        You quickly locate the nearest tree and begin to climb it.
+                                                                        In your rush to climb the tree, the tomahawk slipped out of
+                                                                        your belt loop and fell to the ground. You soon find yourself
+                                                                        30 ft off the ground, without a weapon.
+                                                                     ]
+                                                     Go back for the tomahawk| 1.2.2.2.1||text[
+                                                                                               The sound and movement you make as you climb down the tree is
+                                                                                               and draws too much attention. *pfft* You take an arrow through
+                                                                                               the throat midway down the tree and the color leaves your vision
+                                                                                               as you fall out of the tree. YOU DIED.
+                                                                                              ]
+                                                     1.2.2.2.1.1: Stay in the tree | 1.2.2.2.1||text[
+                                                                                                You decide to stay put and wait it out. Minutes pass before you notice anything
+                                                                                                unusual. You look down and see that someone has managed to light the tree ( the
+                                                                                                one you’re on ) on fire.  The tree quickly becomes engulfed in flames.
+                                                                                                You have to make a decision quick.
+                                                                                             ]
+
+                                                             Stay in tree|1.2.2.2.1.1||text[  Unsurprisingly you burn to a crisp. YOU DIED.]
+                                                             Jump to nearby tree |1.2.2.2.1.1|| text[
+                                                                                           You decide to make on last ditch effort and jump
+                                                                                           to a nearby tree. You grab the branch, but you lose your grip
+                                                                                           and fall to your death. YOU DIED.
+                                                                                          ]
+
+
+
+                                          1.2.2.2.2: Just start running |1.2.2.2||text[
+                                                                            Your adrenaline kicks in as you run for your life.
+                                                                            *pfft* An arrow lodges itself in your left calf.
+                                                                            You fall grasping your leg in agony.
+                                                                           ]
+
+                                                        Try to keep moving|1.2.2.2.2||text[ *pfft* *pfft* You take arrows to the back and bleed out. YOU DIED.]
+
+                                                         1.2.2.2.2.1: Pull out the tomahawk as a last ditch effort|1.2.2.2.2||text[
+                                                                                                                              You hold the tomahawk out arms shaking; you know you’re about to die.
+                                                                                                                               You suddenly see a pair of eyes and yell “WHAT ARE YOU WAITING FOR!
+                                                                                                                               COME GET SOME!” as you raise the tomahawk.
+                                                                                                                            ]
+                                                                        Raise tomahawk|  1.2.2.2.2.1 || text[
+                                                                                                       Once the tomahawk comes into view, whoever was hunting you gasps and
+                                                                                                       mutters something in an unknown language and disappears back into the forest.
+                                                                                                        You're safe for now, but you still have a long journey before find your way
+                                                                                                        out of the woods. YOU SURVIVED.
+                                                                                                     ]
+
+
+
+
+
+                        1.2.3: Look under a nearby log   | 1.2 || text[ You find nothing interesting and decide to keep searching]
+////////////////////////////////////////////////////////            End of Path 2      ///////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
