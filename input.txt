@@ -177,40 +177,40 @@
                                                                                                as you fall out of the tree. YOU DIED.
                                                                                               ]
                                                      1.2.2.2.1.1: Stay in the tree | 1.2.2.2.1||text[
-                                                                                                You decide to stay put and wait it out. Minutes pass before you notice anything
-                                                                                                unusual. You look down and see that someone has managed to light the tree ( the
-                                                                                                one you’re on ) on fire.  The tree quickly becomes engulfed in flames.
-                                                                                                You have to make a decision quick.
-                                                                                             ]
+                                                                                                        You decide to stay put and wait it out. Minutes pass before you notice anything
+                                                                                                        unusual. You look down and see that someone has managed to light the tree ( the
+                                                                                                        one you’re on ) on fire.  The tree quickly becomes engulfed in flames.
+                                                                                                        You have to make a decision quick.
+                                                                                                     ]
 
                                                              Stay in tree|1.2.2.2.1.1||text[  Unsurprisingly you burn to a crisp. YOU DIED.]
                                                              Jump to nearby tree |1.2.2.2.1.1|| text[
-                                                                                           You decide to make on last ditch effort and jump
-                                                                                           to a nearby tree. You grab the branch, but you lose your grip
-                                                                                           and fall to your death. YOU DIED.
-                                                                                          ]
+                                                                                                       You decide to make on last ditch effort and jump
+                                                                                                       to a nearby tree. You grab the branch, but you lose your grip
+                                                                                                       and fall to your death. YOU DIED.
+                                                                                                    ]
 
 
 
                                           1.2.2.2.2: Just start running |1.2.2.2||text[
-                                                                            Your adrenaline kicks in as you run for your life.
-                                                                            *pfft* An arrow lodges itself in your left calf.
-                                                                            You fall grasping your leg in agony.
-                                                                           ]
+                                                                                        Your adrenaline kicks in as you run for your life.
+                                                                                        *pfft* An arrow lodges itself in your left calf.
+                                                                                        You fall grasping your leg in agony.
+                                                                                       ]
 
                                                         Try to keep moving|1.2.2.2.2||text[ *pfft* *pfft* You take arrows to the back and bleed out. YOU DIED.]
 
                                                          1.2.2.2.2.1: Pull out the tomahawk as a last ditch effort|1.2.2.2.2||text[
-                                                                                                                              You hold the tomahawk out arms shaking; you know you’re about to die.
-                                                                                                                               You suddenly see a pair of eyes and yell “WHAT ARE YOU WAITING FOR!
-                                                                                                                               COME GET SOME!” as you raise the tomahawk.
-                                                                                                                            ]
+                                                                                                                                      You hold the tomahawk out arms shaking; you know you’re about to die.
+                                                                                                                                      You suddenly see a pair of eyes and yell “WHAT ARE YOU WAITING FOR!
+                                                                                                                                      COME GET SOME!” as you raise the tomahawk.
+                                                                                                                                   ]
                                                                         Raise tomahawk|  1.2.2.2.2.1 || text[
-                                                                                                       Once the tomahawk comes into view, whoever was hunting you gasps and
-                                                                                                       mutters something in an unknown language and disappears back into the forest.
-                                                                                                        You're safe for now, but you still have a long journey before find your way
-                                                                                                        out of the woods. YOU SURVIVED.
-                                                                                                     ]
+                                                                                                               Once the tomahawk comes into view, whoever was hunting you gasps and
+                                                                                                               mutters something in an unknown language and disappears back into the forest.
+                                                                                                               You're safe for now, but you still have a long journey before find your way
+                                                                                                               out of the woods. YOU SURVIVED.
+                                                                                                             ]
 
 
 
