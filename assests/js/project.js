@@ -1,8 +1,11 @@
 /*jshint esversion: 6 */
 
-const dict = [];          // global dictionary holds the parent -> [children] relationship
-const pictures = [];      // contains all the picures and the question they are associated with
-const messages = [];      // global dictionary which associates each parent to an optional message
+let dict = {};          // global dictionary holds the parent -> [children] relationship
+let pictures = {};      // contains all the picures and the question they are associated with
+let messages = {};      // global dictionary which associates each parent to an optional message
+
+const version = 1.0;                // used to tell the program when to use the data from local storage
+                                    // and when to re-generate that data due to a different version
 
 /**
  * Gets passed int the input file as raw text and builds up the data model.
@@ -132,6 +135,11 @@ function buildDataModel(text) {
 
     }
 
+
+
+
+
+    localStorage[version] = JSON.stringify([dict,pictures,messages]); // store data the data model in local storage once loaded
 
     displayFistQuestion(); // as soon as the data model is complete, display the first question
 }
@@ -413,18 +421,39 @@ function readTextFile(file) {
 
 
 
-    ////////////////////////////////////////////
-    const rawFile = new XMLHttpRequest();
-    rawFile.open("GET", file, false);
-    rawFile.onreadystatechange = function () {
-        if(rawFile.readyState === 4) {
-            if(rawFile.status === 200 || rawFile.status === 0) {
-                const allText = rawFile.responseText;
-                buildDataModel(allText.split("\n"));
+    // try to read data from local storage if the user has visited page.
+    try{
+        const result = JSON.parse(localStorage[version]);
+
+        // copy  over data model instead of parsing and building it from the input file
+        dict     = result[0];
+        pictures = result[1];
+        messages = result[2];
+
+        displayFistQuestion(); // display the inital question
+    }
+    catch(err){  // means there is no data in the local storage or version number is different, so parse file
+
+        const rawFile = new XMLHttpRequest();
+        rawFile.open("GET", file, false);
+        rawFile.onreadystatechange = function () {
+            if(rawFile.readyState === 4) {
+                if(rawFile.status === 200 || rawFile.status === 0) {
+                    const allText = rawFile.responseText;
+                    buildDataModel(allText.split("\n"));
+                }
             }
-        }
-    };
-    rawFile.send(null);
+        };
+        rawFile.send(null);
+
+    }
+
+
+
+
+
+
+
 }
 
 
