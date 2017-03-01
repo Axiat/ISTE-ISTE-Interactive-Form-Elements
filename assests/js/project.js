@@ -153,9 +153,12 @@ function reset() {
 
     const parent = document.getElementById("content");
 
+    let length = parent.childElementCount;
+
     // delete everything in the div with the id, "content"
-    while(parent.firstChild){
-        parent.removeChild(parent.firstChild);
+    while(parent.lastChild && length > 1){
+        parent.removeChild(parent.lastChild);
+        length--;
     }
 
     // display the first question
@@ -165,6 +168,7 @@ function reset() {
 
 function displayFistQuestion() {
     "use strict";
+
 
     const reset_button = document.createElement("button");
     reset_button.appendChild(   document.createTextNode("Restart!")   );
@@ -180,13 +184,67 @@ function displayFistQuestion() {
     div.id = "question-content";
     div.className = "question-wrapper";
 
+    //document.getElementById("content").appendChild(name_form);
     document.getElementById("content").appendChild(reset_button);
     document.getElementById("content").appendChild(div);   // add the new div to the page
 
     displayQuestion(firstQuestion); // once the wrapper is in place, we can start displaying questions
 }
 
+/**
+ * This function is called whenever the body is loaded
+ */
+function handleCookies() {
+    // if cookie does not exist, the user has not been here before
 
+    let form = document.getElementById("name-form");
+
+    if( GetCookie("user_id") === null) {
+
+
+        // The question that is prompted to the user
+        const prompt = document.createElement("p");
+        prompt.appendChild( document.createTextNode("What is your name?") );
+
+
+        // the input txt box
+        const name_input = document.createElement("input");
+        name_input.type = "text";
+        name_input.name = "name";
+
+        // submit button in the form
+        const submit_button = document.createElement("button");
+        submit_button.className = "submit-button";
+        submit_button.appendChild( document.createTextNode("Submit") );
+        submit_button.onclick = function () {
+
+            SetCookie('user_id', name_input.value);
+            SetCookie('hit_count', '0');
+
+            handleCookies();
+        };
+
+
+        form.appendChild(prompt);
+        form.appendChild(name_input);
+        form.appendChild(submit_button);
+
+    }
+    // else we ahve a return visior
+    else {
+        // get the nickname
+        let getName = GetCookie('user_id');
+        // get how many visits they have had here
+        let getHits = GetCookie('hit_count');
+        getHits = parseInt(getHits) + 1;
+        // tell them that big brother is tracking them
+
+
+        form.innerText = "Welcome " + getName + "!, you have visited " + getHits+ " time(s).";
+        // Set the cookie with an updated count.
+        SetCookie('hit_count',getHits);
+    }
+}
 
 function displayQuestion(input) {
     "use strict";
@@ -418,7 +476,6 @@ function buildMultiLineMessage(text_array,text_length,line_number, msg_beginning
  */
 function readTextFile(file) {
     "use strict";
-
 
 
     // try to read data from local storage if the user has visited page.

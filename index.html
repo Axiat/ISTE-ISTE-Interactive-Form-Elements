@@ -7,10 +7,6 @@
     <!-- All CSS imports-->
     <link rel="stylesheet" href="assests/css/my-styles.css">
 
-    <!-- All Javascript imports -->
-    <script src="assests/js/project.js" async></script>
-
-
 
     <!--[if lt IE 9]>
         <script>
@@ -51,16 +47,24 @@
 
 
 </head>
-<body>
+<body onload="handleCookies()">
 
     <h1 id="title" class="row">Can you <b> survive?</b></h1>
 
     <main>
-        <div id="content" class="row"></div>
+        <div id="content" class="row">
+            <div id="name-form" class="row"></div>
+        </div>
     </main>
 
 
 
 
 </body>
+
+    <!-- All Javascript imports -->
+    <script src="assests/js/cookies.js" ></script>
+    <script src="assests/js/project.js" ></script>
+
+
 </html>

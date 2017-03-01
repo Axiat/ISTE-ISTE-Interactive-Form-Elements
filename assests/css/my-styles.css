@@ -160,12 +160,27 @@ main {
 }
 
 
+.submit-button {
+    margin: 10px;
+}
+
+
 .reset-button{
     width: 30%;
     height: 30px;
 
 }
 
+#name-form{
+    margin: 20px;
+    color: white;
+    font-weight: bold;
+}
+
+#user-name {
+    color: #FFCC00;
+    font-style: italic;
+}
 
 
 select {
