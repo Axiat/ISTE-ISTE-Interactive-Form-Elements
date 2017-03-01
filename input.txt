@@ -135,7 +135,7 @@
                                                                         your hand inside, you find an old and weathered tomahawk. Satisfied
                                                                         with the results of the search, you decide to get moving.
                                                                       ]
-                                  1.2.2.1: Head North |1.2.2|| text[
+                                  1.2.2.1: Head North |1.2.2|river.jpg| text[
                                                                      After a couple of minutes, you begin to hear running water.
                                                                      Not soon after, you run into a flowing river about 50ft wide.
                                                                      Off to the left you notice a small barge with a single long stick
@@ -158,7 +158,7 @@
                                                                                 ]
 
 
-                                  1.2.2.2: Head West  |1.2.2|| text[
+                                  1.2.2.2: Head West  |1.2.2|tree.jpg| text[
                                                                      You keep running until you have to stop to catch your breath.
                                                                      The low-pitched whistle goes off again, much louder this time.
                                                                      You begin to feel cornered and quickly begin looking for an out.
