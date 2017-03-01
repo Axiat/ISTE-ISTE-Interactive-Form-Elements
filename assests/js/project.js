@@ -224,7 +224,7 @@ function handleCookies() {
             handleCookies();
         };
 
-
+        // build form
         form.appendChild(prompt);
         form.appendChild(name_input);
         form.appendChild(submit_button);
