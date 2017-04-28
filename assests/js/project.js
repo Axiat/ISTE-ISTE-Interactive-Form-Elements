@@ -161,6 +161,9 @@ function reset() {
         length--;
     }
 
+    // reset question id counter
+    question_counter = 1;
+
     // display the first question
     displayFistQuestion();
 }
@@ -246,6 +249,9 @@ function handleCookies() {
     }
 }
 
+
+let question_counter = 1;
+
 function displayQuestion(input) {
     "use strict";
 
@@ -256,6 +262,7 @@ function displayQuestion(input) {
     // create div that holds an individual question
     const question_div = document.createElement("div");
     question_div.className = "question";
+    question_div.id = question_counter;
 
     // append optional message to question
     const msg_div = document.createElement("div");
@@ -302,6 +309,12 @@ function displayQuestion(input) {
     blank_choice.selected = " ";
     selectList.appendChild( blank_choice );
 
+
+    const fadein_script = document.createElement("script");
+    fadein_script.type = "text/javascript";
+    let code = "fadeInLeft(" + question_counter + ");";
+    fadein_script.text = code;
+
     const children = dict[question];
 
     if(children !== undefined) {
@@ -333,13 +346,45 @@ function displayQuestion(input) {
         question_div.appendChild(pic_div);
     }
 
+    question_div.appendChild(fadein_script);
 
+    // increment question counter
+    question_counter++;
 
     document.getElementById("question-content").appendChild(question_div);   // add the new div to the page
 }
 
 
+/**
+ * Function which takes in the id of the most recently displayed question
+ * and fades in the question from the left
+ * @param id
+ */
+function fadeInLeft(id){
+    // get the element
+    let el = document.getElementById(id);
 
+    // start the div 20px to the left
+    let left_start = 20;
+
+    // initialize the question-div's position and properties
+    el.style.opacity = 0;
+    el.style.display =  "block";
+    el.style.position = "relative";
+    el.style.right = left_start + "px";
+
+    // call a function to gradually fade in and shift object to the right;
+    // the loop executes 20 times
+    (function fade() {
+        var val = parseFloat(el.style.opacity);
+        if (!((val += .05) > 1) && left_start > 0) {
+            el.style.opacity = val;
+            el.style.right = left_start-- + "px";
+            requestAnimationFrame(fade);
+            console.log(left_start);
+        }
+    })();
+}
 
 
 /**

@@ -67,6 +67,7 @@ body{
     margin: 10px;
     padding: 20px;
     min-width: 350px;
+    opacity: 0;
 
 }
 
@@ -83,44 +84,6 @@ body{
 .message{
     margin-top: 15px;
     margin-bottom: 10px;
-}
-
-/* Used this tutorial to create the animation effects --> https://www.tutorialspoint.com/css/css_animation_fade_in_left.htm*/
-
-.question{
-   -webkit-animation-duration: 1s;
-    animation-duration: 1s;
-
-    -webkit-animation-fill-mode: both;
-    animation-fill-mode: both;
-
-    /* assign animation to this class */
-    -webkit-animation-name: fadeInLeft;
-    animation-name: fadeInLeft;
-
-}
-
-/* Create animations that's cross-browser compatible */
-@-webkit-keyframes fadeInLeft { /* using the fadeInLeft */
-    0%{
-        opacity: 0;
-        -webkit-transform: translateX(-20px);
-    }
-    100%{
-        opacity: 1;
-        -webkit-transform: translateX(0);
-    }
-}
-
-@keyframes fadeInLeft {
-    0%{
-        opacity: 0;
-        transform: translateX(-20px);
-    }
-    100%{
-        opacity: 1;
-        transform: translateX(0);
-    }
 }
 
 
