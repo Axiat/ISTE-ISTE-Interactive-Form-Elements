@@ -200,8 +200,9 @@ function displayFistQuestion() {
 function handleCookies() {
     // if cookie does not exist, the user has not been here before
     "use strict";
-    let username  = "custom_user_cookie_id";
-    let hit_count = "custom_hit_count";
+    // created custom cookies names to prevent ANY collsions with other students cookies
+    let username  = "custom_user_cookie_id_0923842";
+    let hit_count = "custom_hit_count_67236409";
 
     let form = document.getElementById("name-form");
 
