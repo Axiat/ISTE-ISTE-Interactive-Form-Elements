@@ -253,7 +253,7 @@ function handleCookies() {
         // tell them that big brother is tracking them
 
 
-        form.innerText = "Welcome " + getName + "!, you have visited " + getHits+ " time(s).";
+        form.innerText = "Welcome " + getName + "! you have visited " + getHits+ " time(s).";
         // Set the cookie with an updated count.
         SetCookie(hit_count,getHits);
     }

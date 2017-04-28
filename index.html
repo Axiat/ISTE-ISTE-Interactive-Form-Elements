@@ -7,14 +7,35 @@
     <!-- All CSS imports-->
     <link rel="stylesheet" href="assests/css/my-styles.css">
 
+    <script>
+        /**
+         * This  script was taken from a stack overflow question, the link is below
+         * SRC: http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
+         *
+         * detect IE
+         * returns version of IE or false, if browser is not Internet Explorer
+         */
+        function not_supported_browser() {
 
-    <!--[if lt IE 10]>
-        <script>
-            var ltIE9 = true;
+            // Safari 3.0+ "[object HTMLElementConstructor]"
+            var isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || safari.pushNotification);
+
+            // Internet Explorer 6-11
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
+
+            // Edge 20+
+            var isEdge = !isIE && !!window.StyleMedia;
+
+            return isEdge || isSafari || isIE ;
+        }
+
+
+        if(  not_supported_browser()  ){
             alert("you are using an old browser. Please install a new browser");
             window.location = "http://outdatedbrowser.com/en";
-        </script>
-    <![endif]-->
+        }
+
+    </script>
 
 
 </head>
