@@ -199,10 +199,13 @@ function displayFistQuestion() {
  */
 function handleCookies() {
     // if cookie does not exist, the user has not been here before
+    "use strict";
+    let username  = "custom_user_cookie_id";
+    let hit_count = "custom_hit_count";
 
     let form = document.getElementById("name-form");
 
-    if( GetCookie("user_id") === null) {
+    if( GetCookie(username) === null) {
 
 
         // The question that is prompted to the user
@@ -221,10 +224,16 @@ function handleCookies() {
         submit_button.appendChild( document.createTextNode("Submit") );
         submit_button.onclick = function () {
 
-            SetCookie('user_id', name_input.value);
-            SetCookie('hit_count', '0');
+            if(name_input.value && name_input.value.trim() !== ""){
+                SetCookie(username, name_input.value.trim());
+                SetCookie(hit_count, '0');
 
-            handleCookies();
+                handleCookies();
+            }
+            else{
+                alert("You forgot to enter your name!");
+            }
+
         };
 
         // build form
@@ -236,16 +245,16 @@ function handleCookies() {
     // else we ahve a return visior
     else {
         // get the nickname
-        let getName = GetCookie('user_id');
+        let getName = GetCookie(username);
         // get how many visits they have had here
-        let getHits = GetCookie('hit_count');
+        let getHits = GetCookie(hit_count);
         getHits = parseInt(getHits) + 1;
         // tell them that big brother is tracking them
 
 
         form.innerText = "Welcome " + getName + "!, you have visited " + getHits+ " time(s).";
         // Set the cookie with an updated count.
-        SetCookie('hit_count',getHits);
+        SetCookie(hit_count,getHits);
     }
 }
 
@@ -365,23 +374,22 @@ function fadeInLeft(id){
     let el = document.getElementById(id);
 
     // start the div 20px to the left
-    let left_start = 20;
+    let start_position = 20;
 
     // initialize the question-div's position and properties
     el.style.opacity = 0;
     el.style.display =  "block";
     el.style.position = "relative";
-    el.style.right = left_start + "px";
+    el.style.right = start_position + "px";
 
     // call a function to gradually fade in and shift object to the right;
     // the loop executes 20 times
     (function fade() {
         var val = parseFloat(el.style.opacity);
-        if (!((val += .05) > 1) && left_start > 0) {
+        if (!((val += .05) > 1) && start_position > 0) {
             el.style.opacity = val;
-            el.style.right = left_start-- + "px";
+            el.style.right = start_position-- + "px";
             requestAnimationFrame(fade);
-            console.log(left_start);
         }
     })();
 }
